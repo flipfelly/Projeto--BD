@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8f7; /* Verde Pastel */
+}
+
+header {
+    background-color: #d3ead6; /* Verde Pastel mais escuro */
+    color: #004d40; /* Verde mais escuro */
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff; /* Branco */
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+th {
+    background-color: #d3ead6; /* Verde Pastel mais escuro */
+    color: #004d40; /* Verde mais escuro */
+    font-weight: bold;
+}
+
+td {
+    text-align: center;
+}
+
+.excluir-button, .editar-button {
+    padding: 8px 16px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.excluir-button {
+    background-color: #ff7043; /* Laranja */
+    color: #fff;
+}
+
+.excluir-button:hover {
+    background-color: #ff8a65; /* Laranja mais claro */
+}
+
+.editar-button {
+    background-color: #a5d6a7; /* Verde Pastel mais claro */
+    color: #004d40; /* Verde mais escuro */
+}
+
+.editar-button:hover {
+    background-color: #81c784; /* Verde Pastel mais claro */
+}
+
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #004d40; /* Verde Escuro */
+    color: #ffffff; /* Branco */
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #00695c; /* Verde Escuro mais claro */
+}

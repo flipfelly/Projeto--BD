@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo à Livraria</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#search-form').on('submit', function(e){
+                e.preventDefault();
+                var termo_pesquisa = $('#termo_pesquisa').val();
+                $.ajax({
+                    type: 'GET',
+                    url: '/pesquisar',
+                    data: {titulo: termo_pesquisa},
+                    success: function(response){
+                        $('#resultado-pesquisa').html(response);
+                    }
+                });
+            });
+        });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8f7; /* Verde Pastel */
+        }
+        header {
+            background-color: #d3ead6; /* Verde Pastel mais escuro */
+            color: #004d40; /* Verde mais escuro */
+            text-align: center;
+            padding: 20px 0;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        button {
+            background-color: #a5d6a7; /* Verde Pastel mais claro */
+            color: #004d40; /* Verde mais escuro */
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #81c784; /* Verde Pastel mais claro */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo à Livraria</h1>
+    </header>
+    <div class="container">
+        <button onclick="window.location.href='/cadastro'">Cadastrar Livro</button>
+        <button onclick="window.location.href='/listar'">Listar Livros</button>
+    </div>
+
+    <form id="search-form">
+        <input type="text" id="termo_pesquisa" name="titulo" placeholder="Digite o título do livro">
+        <button type="submit">Pesquisar</button>
+    </form>
+    <div id="resultado-pesquisa"></div>
+
+
+</body>
+</html>

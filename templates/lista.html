@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Livros</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Lista de Livros</h1>
+    </header>
+    <div class="container">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Editora</th>
+                <th>Gênero</th>
+                <th>Quantidade</th>
+                <th>Ano</th>
+            </tr>
+            {% for livro in livros %}
+            <tr>
+                <td>{{ livro.id }}</td>
+                <td>{{ livro.titulo }}</td>
+                <td>{{ livro.autor }}</td>
+                <td>{{ livro.editora }}</td>
+                <td>{{ livro.genero }}</td>
+                <td>{{ livro.quantidade }}</td>
+                <td>{{ livro.ano }}</td>
+                <td> <form action="/excluir/{{ livro.id }}" method="post"><button class ="excluir-button">Excluir</button> </form>
+                <td><form action ="/editar/{{ livro.id }}" method = "get"><button class = "editar-button">Editar</button> </form>
+            </tr>
+            {% endfor %}
+        </table>  
+    </div>
+    <a href="/" class="back-button">↩</a>
+</body>
+</html>

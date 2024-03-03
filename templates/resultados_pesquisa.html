@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<h2>Resultados da Pesquisa por "{{ termo_pesquisa }}"</h2>
+<ul>
+    {% for livro in livros %}
+        <li>{{ livro.titulo }} - {{ livro.autor }}</li>
+    {% endfor %}
+</ul>
