@@ -1,28 +1,33 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium';
     margin: 0;
     padding: 0;
     background-color: #f0f8f7; /* Verde Pastel */
 }
 
 header {
+    font-family: Cambria;
     background-color: #d3ead6; /* Verde Pastel mais escuro */
     color: #004d40; /* Verde mais escuro */
     text-align: center;
     padding: 20px 0;
-}
-
-h1 {
-    margin: 0;
+    background-image: url('https://img.freepik.com/fotos-gratis/fundo-de-papel-de-espaco-de-design-texturizado_53876-42312.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+    background-blend-mode: multiply;
+    background-color: #0a816d;
 }
 
 .container {
-    max-width: 800px;
+    text-align: center;
+    max-width: 900px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff; /* Branco */
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    overflow: auto;
 }
 
 table {
@@ -32,6 +37,7 @@ table {
 
 
 th, td {
+    font-family: Times, serif;
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
@@ -84,10 +90,155 @@ td {
     line-height: 40px;
     text-align: center;
     border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
     text-decoration: none;
 }
 
 .back-button:hover {
     background-color: #00695c; /* Verde Escuro mais claro */
+}
+
+.botao-pesquisa {
+    background-color: #a5d6a7; /* Verde Pastel */
+    color: #004d40; /* Verde mais escuro */
+    padding: 20px 20px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 30px; /* Largura da imagem */
+    height: 30px; /* Altura da imagem */
+    background-image: url("https://cdn-icons-png.flaticon.com/128/2311/2311526.png"); /* Caminho para sua imagem */
+    background-size: cover; /* Ajustar o tamanho da imagem ao botão */
+    background-position: center; /* Posição da imagem no botão */
+    text-indent: -9999px;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.534);
+}
+
+/* Estilo do botão de pesquisa quando passa o mouse por cima */
+.botao-pesquisa:hover {
+    background-color: #81c784; /* Verde Pastel mais claro */
+}
+
+/* Estilo da imagem de lupa dentro do botão */
+.search-form-container {
+    max-width: 300px;
+    width: 125%;
+    margin: 10px 10px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f7faf7; /* Verde Pastel mais escuro */
+    border: none;
+}
+.button {
+    background-color: #a5d6a7; /* Verde Pastel mais claro */
+    color: #004d40; /* Verde mais escuro */
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.button:hover {
+    background-color: #81c784; /* Verde Pastel mais claro */
+}
+
+.linha-par {
+    background-color: #f2f2f2; /* Cor de fundo para linhas pares */
+}
+
+/* Estilo para linhas ímpares da tabela */
+.linha-impar {
+    background-color: #ffffff; /* Cor de fundo para linhas ímpares */
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+    color: #004d40; /* Verde mais escuro */
+}
+.menu-toggle {
+    display: none;
+}
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: #d3ead6; /* Verde Pastel mais claro */
+    transition: 0.5s;
+    padding-top: 80px;
+    z-index: 1000;
+}
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #004d40; /* Verde mais escuro */
+    display: block;
+    transition: 0.3s;
+}
+.sidebar a:hover {
+    background-color: #c1e2c8; /* Verde Pastel mais escuro */
+}
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #004d40; /* Verde mais escuro */
+    color: #fff; /* Branco */
+    padding: 10px 15px;
+    border: none;
+    position: fixed;
+    top: 25px;
+    left: 20px;
+    z-index: 1100;
+    border-radius: 25px;
+}
+.openbtn:hover {
+    background-color: #003c31; /* Verde mais escuro */
+}
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        padding-top: 50px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .sidebar {
+        width: 150px;
+        padding-top: 40px;
+    }
+}
+
+@keyframes wave {
+    0% {
+        transform: translateX(0%) translateY(0px);
+    }
+    50% {
+        transform: translateX(0%) translateY(10px);
+    }
+    100% {
+        transform: translateX(0%) translateY(0);
+    }
+}
+
+.wave-title {
+    position: relative;
+    display: inline-block;
+    animation: wave 3s ease-in-out;
+}
+h2{
+    margin-bottom: 10;
+    margin-top: 0;
+    font-family: Cambria;
+    text-align: center;
+    color: #004d40; /* Verde mais escuro */
+   
+}
+p{
+    font-family: Cambria;
+    text-align: center;
+    color: #004d40; /* Verde mais escuro */
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1 style="color: #d3ead6">Relatório</h1>
+    </header>
+    <div class="container" style="width: 500px;">
+        <h2>Dados do Relatório</h2>
+            <p style="font-size: 18px;"><strong style="text-decoration: underline;">Total de itens cadastrados:</strong> {{ total_cadastrados }}</p>
+            <p style="font-size: 18px;"><strong style="text-decoration: underline;">Quantidade de livros no estoque: </strong>{{ livros_no_estoque }}</p>
+            <p style="font-size: 18px;"><strong style="text-decoration: underline;">Valor total no estoque:</strong> R$ {{ valor_total_estoque }}</p>
+    </div>
+    <a href="/" class="back-button">↩</a>
+</body>
+</html>

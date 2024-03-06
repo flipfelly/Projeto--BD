@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Livro</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">      
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 style="color: #d3ead6">Detalhes do Livro</h1>
+            <h2 class="titulo-livro" style="font-family: monospace; color:beige; margin-top: 10px;margin-bottom: 0 ;">{{ livro.titulo }}</h2> 
+        </header>
+        <p><strong>Autor:</strong> {{ livro.autor.nome }}</p>
+        <p><strong>Editora:</strong> {{ livro.editora.nome }}</p>
+        <p><strong>Gênero:</strong> {{ livro.genero.nome }}</p>
+        <p><strong>Quantidade:</strong> {{ livro.quantidade }}</p>
+        <p><strong>Ano:</strong> {{ livro.ano }}</p>
+        <p><strong>Preço:</strong> R$ {{ livro.preco }}</p>
+        <button class = "button" onclick="window.history.back()">Voltar</button>
+    </div>
+</body>
+</html>

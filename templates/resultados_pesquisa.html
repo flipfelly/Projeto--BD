@@ -1,7 +1,28 @@
-<!DOCTYPE html>
-<h2>Resultados da Pesquisa por "{{ termo_pesquisa }}"</h2>
-<ul>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Editora</th>
+        <th>Gênero</th>
+        <th>Quantidade</th>
+        <th>Ano</th>
+        <th>Preço</th>
+        <th></th>
+        <th></th>
+    </tr>
     {% for livro in livros %}
-        <li>{{ livro.titulo }} - {{ livro.autor }}</li>
+    <tr>
+        <td>{{ livro.id }}</td>
+        <td>{{ livro.titulo }}</td>
+        <td>{{ livro.autor }}</td>
+        <td>{{ livro.editora }}</td>
+        <td>{{ livro.genero }}</td>
+        <td>{{ livro.quantidade }}</td>
+        <td>{{ livro.ano }}</td>
+        <td>{{ livro.preco }}</td>
+        <td> <form action="/excluir/{{ livro.id }}" method="post"><button class ="excluir-button">Excluir</button> </form>
+        <td><form action ="/editar/{{ livro.id }}" method = "get"><button class = "editar-button">Editar</button> </form>
+    </tr>
     {% endfor %}
-</ul>
+</table>
