@@ -2,13 +2,13 @@ body {
     font-family: 'Franklin Gothic Medium';
     margin: 0;
     padding: 0;
-    background-color: #f0f8f7; /* Verde Pastel */
+    background-color: #f0f8f7; 
 }
 
 header {
     font-family: Cambria;
-    background-color: #d3ead6; /* Verde Pastel mais escuro */
-    color: #004d40; /* Verde mais escuro */
+    background-color: #d3ead6; 
+    color: #004d40; 
     text-align: center;
     padding: 20px 0;
     background-image: url('https://img.freepik.com/fotos-gratis/fundo-de-papel-de-espaco-de-design-texturizado_53876-42312.jpg');
@@ -22,9 +22,10 @@ header {
 .container {
     text-align: center;
     max-width: 900px;
+    max-height: 450px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff; /* Branco */
+    background-color: #fff; 
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     overflow: auto;
@@ -36,21 +37,20 @@ table {
 }
 
 
-th, td {
+td {
+    text-align: center;
     font-family: Times, serif;
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
 
 th {
-    background-color: #d3ead6; /* Verde Pastel mais escuro */
-    color: #004d40; /* Verde mais escuro */
+    background-color: #d3ead6; 
+    color: #004d40; 
     font-weight: bold;
 }
 
-td {
-    text-align: center;
-}
+
 
 .excluir-button, .editar-button {
     padding: 8px 16px;
@@ -61,29 +61,29 @@ td {
 }
 
 .excluir-button {
-    background-color: #ff7043; /* Laranja */
+    background-color: #ff7043; 
     color: #fff;
 }
 
 .excluir-button:hover {
-    background-color: #ff8a65; /* Laranja mais claro */
+    background-color: #ff8a65; 
 }
 
 .editar-button {
-    background-color: #a5d6a7; /* Verde Pastel mais claro */
-    color: #004d40; /* Verde mais escuro */
+    background-color: #a5d6a7; 
+    color: #004d40; 
 }
 
 .editar-button:hover {
-    background-color: #81c784; /* Verde Pastel mais claro */
+    background-color: #81c784; 
 }
 
 .back-button {
     position: fixed;
     top: 20px;
     left: 20px;
-    background-color: #004d40; /* Verde Escuro */
-    color: #ffffff; /* Branco */
+    background-color: #004d40; 
+    color: #ffffff; 
     width: 40px;
     height: 40px;
     font-size: 24px;
@@ -95,44 +95,44 @@ td {
 }
 
 .back-button:hover {
-    background-color: #00695c; /* Verde Escuro mais claro */
+    background-color: #00695c; 
 }
 
 .botao-pesquisa {
-    background-color: #a5d6a7; /* Verde Pastel */
-    color: #004d40; /* Verde mais escuro */
+    background-color: #a5d6a7; 
+    color: #004d40; 
     padding: 20px 20px;
     border: none;
     border-radius: 100px;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 30px; /* Largura da imagem */
-    height: 30px; /* Altura da imagem */
-    background-image: url("https://cdn-icons-png.flaticon.com/128/2311/2311526.png"); /* Caminho para sua imagem */
-    background-size: cover; /* Ajustar o tamanho da imagem ao botão */
-    background-position: center; /* Posição da imagem no botão */
+    width: 30px; 
+    height: 30px; 
+    background-image: url("https://cdn-icons-png.flaticon.com/128/2311/2311526.png"); 
+    background-size: cover; 
+    background-position: center; 
     text-indent: -9999px;
     box-shadow: -4px 0 10px rgba(0, 0, 0, 0.534);
 }
 
-/* Estilo do botão de pesquisa quando passa o mouse por cima */
+
 .botao-pesquisa:hover {
-    background-color: #81c784; /* Verde Pastel mais claro */
+    background-color: #81c784; 
 }
 
-/* Estilo da imagem de lupa dentro do botão */
+
 .search-form-container {
     max-width: 300px;
     width: 125%;
     margin: 10px 10px;
     border-radius: 10px;
     padding: 10px;
-    background-color: #f7faf7; /* Verde Pastel mais escuro */
+    background-color: #f7faf7; 
     border: none;
 }
 .button {
-    background-color: #a5d6a7; /* Verde Pastel mais claro */
-    color: #004d40; /* Verde mais escuro */
+    background-color: #a5d6a7; 
+    color: #004d40; 
     padding: 10px 20px;
     margin: 10px;
     border: none;
@@ -141,22 +141,22 @@ td {
     transition: background-color 0.3s;
 }
 .button:hover {
-    background-color: #81c784; /* Verde Pastel mais claro */
+    background-color: #81c784; 
 }
 
 .linha-par {
-    background-color: #f2f2f2; /* Cor de fundo para linhas pares */
+    background-color: #f2f2f2; 
 }
 
-/* Estilo para linhas ímpares da tabela */
+
 .linha-impar {
-    background-color: #ffffff; /* Cor de fundo para linhas ímpares */
+    background-color: #ffffff; 
 }
 
 h1 {
     margin: 0;
     text-align: center;
-    color: #004d40; /* Verde mais escuro */
+    color: #004d40; 
 }
 .menu-toggle {
     display: none;
@@ -167,7 +167,7 @@ h1 {
     position: fixed;
     top: 0;
     left: -250px;
-    background-color: #d3ead6; /* Verde Pastel mais claro */
+    background-color: #d3ead6; 
     transition: 0.5s;
     padding-top: 80px;
     z-index: 1000;
@@ -176,17 +176,17 @@ h1 {
     padding: 10px 15px;
     text-decoration: none;
     font-size: 20px;
-    color: #004d40; /* Verde mais escuro */
+    color: #004d40; 
     display: block;
     transition: 0.3s;
 }
 .sidebar a:hover {
-    background-color: #c1e2c8; /* Verde Pastel mais escuro */
+    background-color: #c1e2c8; 
 }
 .openbtn {
     font-size: 20px;
     cursor: pointer;
-    background-color: #004d40; /* Verde mais escuro */
+    background-color: #004d40; 
     color: #fff; /* Branco */
     padding: 10px 15px;
     border: none;
@@ -197,7 +197,7 @@ h1 {
     border-radius: 25px;
 }
 .openbtn:hover {
-    background-color: #003c31; /* Verde mais escuro */
+    background-color: #003c31; 
 }
 @media screen and (max-width: 768px) {
     .sidebar {
@@ -234,11 +234,11 @@ h2{
     margin-top: 0;
     font-family: Cambria;
     text-align: center;
-    color: #004d40; /* Verde mais escuro */
+    color: #004d40; 
    
 }
 p{
     font-family: Cambria;
     text-align: center;
-    color: #004d40; /* Verde mais escuro */
+    color: #004d40; 
 }

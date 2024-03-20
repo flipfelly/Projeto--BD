@@ -29,7 +29,7 @@
             <th>Gênero</th>
             <th>Quantidade</th>
             <th>Ano</th>
-            <th>Preço</th>
+            <th> Preço </th>
             <th><form id="search-form" action="/" method="GET">
                 <input type="text" class = "search-form-container" id="termo_pesquisa" name="termo_pesquisa" placeholder="Digite o título">
             <th><button type="submit" class="botao-pesquisa"></button></th> 
@@ -45,7 +45,7 @@
                 <td>{{ livro.genero.nome }}</td>
                 <td>{{ livro.quantidade }}</td>
                 <td>{{ livro.ano }}</td>
-                <td>{{ livro.preco }} </td>
+                <td>R${{livro.preco}}</td>
                 <td><form action="/excluir/{{ livro.id }}" method="post"><button class ="excluir-button">Excluir</button> </form>
                 <td><form action ="/editar/{{ livro.id }}" method = "get"><button class = "editar-button">Editar</button> </form>
             </tr>

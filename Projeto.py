@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
+#conexão com o banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:123456@localhost/livraria'
 
 db = SQLAlchemy(app)
@@ -57,7 +58,7 @@ with app.app_context():
     db.create_all()
 
 @app.route('/')
-def index():
+def index(): #read
     termo_pesquisa = request.args.get('termo_pesquisa')
     livros = Livro.query.all()
     if termo_pesquisa:
@@ -69,7 +70,7 @@ def cadastro():
     return render_template('cadastro.html')
 
 @app.route("/cadastrar", methods=['POST'])
-def cadastrar():
+def cadastrar(): #create
     if request.method == 'POST':
         titulo = request.form.get("titulo")
         quantidade = request.form.get("quantidade")
@@ -80,7 +81,7 @@ def cadastrar():
         genero_nome = request.form.get("genero")
 
         autor = Autor.query.filter_by(nome=autor_nome).first()
-        if not autor:
+        if not autor: #caso o autor não exista, ele é criado
             autor = Autor(nome=autor_nome)
             db.session.add(autor)
 
@@ -106,7 +107,7 @@ def cadastrar():
     return render_template("cadastro.html")
 
 @app.route('/excluir/<int:id>', methods=['POST'])
-def excluir(id):
+def excluir(id): #delete
     if request.method == 'POST':
         livro = Livro.query.filter_by(id=id).first()
         db.session.delete(livro)
@@ -118,7 +119,7 @@ def excluir(id):
 
 
 @app.route('/editar/<int:id>', methods=['GET', 'POST'])
-def editar(id):
+def editar(id): #update
     livro = Livro.query.get(id)
     if request.method == 'POST':
         titulo = request.form.get("titulo")
@@ -164,14 +165,14 @@ def editar(id):
     return render_template('editar.html', livro=livro)
 
 
-@app.route('/pesquisar', methods=['POST'])
+'''@app.route('/pesquisar', methods=['POST'])
 def pesquisar_livros():
     termo_pesquisa = request.form.get('titulo')
     if termo_pesquisa:
         livros_encontrados = Livro.query.filter(Livro.titulo.like(f'%{termo_pesquisa}%')).all()
         return render_template('resultados_pesquisa.html', livros=livros_encontrados, termo_pesquisa=termo_pesquisa)
     else:
-        return redirect(url_for('/'))
+        return redirect(url_for('/'))''' #consegui colocar direto no index
 
 @app.route('/livro_aleatorio')
 def livro_aleatorio():
@@ -186,7 +187,7 @@ def livro_aleatorio():
 def relatorio():
     total_cadastrados = Livro.query.count()
     livros_no_estoque = Livro.query.with_entities(db.func.sum(Livro.quantidade)).scalar()
-    valor_total_estoque = Livro.query.with_entities(db.func.sum(Livro.quantidade * Livro.preco)).scalar()
+    valor_total_estoque = round(Livro.query.with_entities(db.func.sum(Livro.quantidade * Livro.preco)).scalar(), 2) #arredondar para 2 casas decimais
     return render_template('relatorio.html', total_cadastrados=total_cadastrados, livros_no_estoque=livros_no_estoque, valor_total_estoque=valor_total_estoque)  
 
 
