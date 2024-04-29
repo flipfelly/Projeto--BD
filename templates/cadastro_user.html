@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Pessoa</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d3ead6; /* Verde Pastel */
+            text-align: center;
+        }
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff; /* Branco */
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+            text-align: left;
+        }
+        label {
+            color: #004d40; /* Verde mais escuro */
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"] {
+            margin-top: 10px;
+        }
+        button[type="submit"] {
+            width: 100%;
+            background-color: #a5d6a7; /* Verde Pastel mais claro */
+            color: #004d40; /* Verde mais escuro */
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #81c784; /* Verde Pastel mais claro */
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="color: #d3ead6">Realizar Cadastro</h1>
+    </header>
+    <div class="container">
+        {% if mensagem %}
+            <p class="mensagem-erro">{{ mensagem }}</p>
+        {% endif %}
+       
+        <form action="{{ url_for('cadastrar_pessoa') }}" method="POST">
+        
+            
+        {%if current_user.tipo == "funcionario" %}
+            <label for="tipo">Tipo:</label><br>
+            <select id="tipo" name="tipo" onchange="toggleFields(this.value)">
+                <option value="cliente">Cliente</option>
+                <option value="funcionario" selected>Funcionário</option>
+            </select><br><br>
+
+            <label for="Nome">Nome:</label><br>
+            <input type="text" id="Nome" name="Nome" required><br>
+
+            <label for="CPF">CPF:</label><br>
+            <input type="text" id="CPF" name="CPF" required><br>
+
+            <label for="E-mail">Email:</label><br>
+            <input type="email" id="E-mail" name="E-mail" required><br>
+
+            <label for="senha">Senha:</label><br>
+            <input type="password" id="senha" name="senha" required><br>
+
+            <div id="cliente_fields" class="hidden">
+                <label for="Telefone">Telefone:</label><br>
+                <input type="text" id="Telefone" name="Telefone"><br>
+
+                <label for="time">Torcer para o time:</label><br>
+                <input type="text" id="time" name="time"><br>
+
+                <label for="OnePiece">É fã de OnePiece?</label><br>
+                <input type="checkbox" id="OnePiece" name="OnePiece"><br><br>
+            </div>
+         
+            
+        {%else%}
+
+            <label for="Nome">Nome:</label><br>
+            <input type="text" id="Nome" name="Nome" required><br>
+
+            <label for="CPF">CPF:</label><br>
+            <input type="text" id="CPF" name="CPF" required><br>
+
+            <label for="E-mail">Email:</label><br>
+            <input type="email" id="E-mail" name="E-mail" required><br>
+
+            <label for="senha">Senha:</label><br>
+            <input type="password" id="senha" name="senha" required><br>
+            
+            <div id="cliente_fields">
+                <label for="Telefone">Telefone:</label><br>
+                <input type="text" id="Telefone" name="Telefone" required><br>
+
+                <label for="time">Torcer para o time:</label><br>
+                <input type="text" id="time" name="time" required><br>
+
+                <label for="OnePiece">É fã de OnePiece?</label><br>
+                <input type="checkbox" id="OnePiece" name="OnePiece"><br><br>
+            </div>
+        {%endif%}
+        <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+    <a href="/" class="back-button">↩</a>
+
+    <script>
+        function toggleFields(tipo) {
+            var fields = document.getElementById('cliente_fields');
+            if (tipo === 'cliente') {
+                fields.classList.remove('hidden');
+                document.getElementById('Telefone').required = true;
+                document.getElementById('time').required = true;
+            } else {
+                fields.classList.add('hidden');
+                document.getElementById('Telefone').required = false;
+                document.getElementById('time').required = false;
+            }
+        }
+
+        // Chame a função para garantir que os campos corretos sejam exibidos quando a página for carregada
+        window.onload = function() {
+            toggleFields(document.getElementById('tipo').value);
+        };
+    </script>
+</body>
+</html>

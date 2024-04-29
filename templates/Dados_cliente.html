@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}"> 
+    <title>Dados do Cliente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7; /* Fundo cinza claro */
+            color: #333; /* Cor do texto */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff; /* Fundo branco */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+
+
+
+        p {
+            text-align: left;
+            margin: 10px 0;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        .boolean {
+            color: #6ab04c; /* Verde */
+        }
+
+        .boolean.no {
+            color: #ff6347; /* Vermelho */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .linha-par {
+            background-color: #d9ead3; /* Verde pastel */
+        }
+
+        .linha-impar {
+            background-color: #fff; /* Branco */
+        }
+
+        .search-form-container {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .botao-pesquisa {
+            padding: 8px 20px;
+            background-color: #6ab04c; /* Verde */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .botao-pesquisa:hover {
+            background-color: #4d7e2b; /* Verde mais escuro */
+        }
+
+        .excluir-button, .editar-button {
+            padding: 8px 20px;
+            background-color: #f44336; /* Vermelho */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .excluir-button:hover, .editar-button:hover {
+            background-color: #da190b; /* Vermelho mais escuro */
+        }
+    </style>
+</head>
+<header>
+    <h1 class = "header" style="color: #d3ead6">Dados cadastrais</h1>
+</header>
+<body>
+    <div class="container">
+        <h1>Dados do Cliente</h1>
+        <p><strong>Nome:</strong> {{ cliente.nome }}</p>
+        <p><strong>CPF:</strong> {{ cliente.cpf }}</p>
+        <p><strong>E-mail:</strong> {{ cliente.email }}</p>
+        <p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
+        <p><strong>Time:</strong> {{ cliente.time }}</p>
+        <p><strong>Fã de One Piece:</strong> <span class="boolean {% if cliente.onepiece_fan == 1 %}yes{% else %}no{% endif %}">{% if cliente.onepiece_fan == 1 %}Sim{% else %}Não{% endif %}</span></p>
+        
+        <h1>Minhas Compras</h1>
+        {% if vendas %}
+            <table>
+                <tr>
+                    <th>ID da Venda</th>
+                    <th>Livro</th>
+                    <th>Quantidade</th>
+                    <th>Forma de Pagamento</th>
+                    <th>Valor Total</th>
+                </tr>
+                {% for venda in vendas %}
+                    <tr class="{{ 'linha-par' if loop.index % 2 == 0 else 'linha-impar' }}">
+                        <td>{{ venda.id }}</td>
+                        <td>{{ venda.livro.titulo }}</td>
+                        <td>{{ venda.quantidade }}</td>
+                        <td>{{ venda.forma_pagamento }}</td>
+                        <td>R$ {{ venda.valor }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>Você ainda não fez nenhuma compra.</p>
+        {% endif %}
+    </div>
+    <a href="/" class="back-button">↩</a>
+</body>
+</html>

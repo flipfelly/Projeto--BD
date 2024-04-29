@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}"> 
+    <title>Relatório Mensal de Vendas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0fff4; /* Verde pastel */
+            color: #4a4e4d; /* Cinza escuro */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff; /* Branco */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #379683; /* Verde mais escuro */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #d8f3dc; /* Verde pastel mais claro */
+        }
+        tr:hover {
+            background-color: #f0f0f0; /* Cinza claro ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Relatório Mensal de Vendas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Mês</th>
+                <th>Vendedor</th>
+                <th>Total de Vendas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venda in relatorio %}
+            <tr>
+                <td>{{ venda[0] }}</td>
+                <td>{{ venda[1] }}</td>
+                <td>R${{ '%.2f' % venda[2]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<a href="/" class="back-button">↩</a>
+</body>
+</html>

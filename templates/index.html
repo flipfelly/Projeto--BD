@@ -5,39 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}"> 
     
+    <style>
+        /* Estilo para o modal de compra */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+        }
+        .modal-content {
+            width: 340px;
+            height:  440px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fefefe;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #888;
+            border-radius: 10px;
+            overflow: auto;
+        }
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 10px; /* Posição do topo */
+            right: 10px; /* Posição da direita */
+            font-size: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        input[type="number"]{
+            width: auto;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+       
+        .genero{
+            width: auto;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+
+        }
+
+        button[type="submit"] {
+            width: auto;
+            background-color: #a5d6a7; /* Verde Pastel mais claro */
+            color: #004d40; /* Verde mais escuro */
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #81c784; /* Verde Pastel mais claro */
+        }
+        .checkbox {
+        border-radius: 4px;
+        border: 1px solid #6ab04c; /* cor da borda */
+        outline: none;
+        cursor: pointer;
+        vertical-align: middle;
+}
+
+        /* Estilo para a mensagem de erro */
+        .erro {
+            display: none;
+            color: red;
+        }
+
+    </style>
 </head>
 <body>
     <header class="header">
-        <h1 class = "wave-title" style = "font-size: xxx-large; color: #d3ead6"> 𝕷𝖎𝖛𝖗𝖆𝖗𝖎𝖆 </h1>
+        <h1 class="wave-title" style="font-size: xxx-large; color: #d3ead6">𝕷𝖎𝖛𝖗𝖆𝖗𝖎𝖆</h1>
         <button class="openbtn" onclick="toggleMenu()">☰ Menu</button>
+        {% if current_user.is_authenticated == False %}
+        <form action="/login" method="get">
+            <button class="editar-button" style="cursor: pointer;position: fixed; top: 28px; left: 140px; max-width: 100px; height: 40px;">Conectar</button>
+        </form>
+        {% else %}
+        <form action="/logout" method="get">
+            <button class="editar-button" style="cursor: pointer;position: fixed; top: 20px; left: 140px; max-width: 100px; height: 40px;">Desconectar</button>
+        </form>
+        {% endif %}
     </header>
     <div id="mySidebar" class="sidebar">
+        {%if current_user.is_authenticated and current_user.tipo == 'cliente' %}
+        <a href="/dados_cadastro">Meus Dados</a>
+        {%endif%}
+        {%if not current_user.is_authenticated%}
+        <a href="/cadastrar_pessoa">Cadastro</a>
+        {% endif %}
+        {%if current_user.tipo == 'funcionario'%}
+        <a href="/relatorio_mensal">Relatorio de Vendas</a>
         <a href="/relatorio">Ver Relatório</a>
         <a href="/cadastro">Cadastrar Livro</a>
+        {%endif%}
         <a href="/livro_aleatorio">Ver Livro Aleatório</a>
     </div>
     
     <div class="container">  
         <h2>Lista de Livros</h2>
-       {% if livros %}
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Autor</th>
-            <th>Editora</th>
-            <th>Gênero</th>
-            <th>Quantidade</th>
-            <th>Ano</th>
-            <th> Preço </th>
-            <th><form id="search-form" action="/" method="GET">
-                <input type="text" class = "search-form-container" id="termo_pesquisa" name="termo_pesquisa" placeholder="Digite o título">
-            <th><button type="submit" class="botao-pesquisa"></button></th> 
-            </form>
-            </th>
-        </tr>
-         {% for livro in livros %}
-        <tr class="{{ 'linha-par' if livro.id % 2 == 0 else 'linha-impar' }}">
+        <form action="{{ url_for('index') }}" method="get">
+            <input type="number" name="valor_min" placeholder="Valor mínimo...">
+            <input type="number" name="valor_max" placeholder="Valor máximo...">
+            <input type="number" name="ano_publicacao" placeholder="Ano de publicação...">
+            <input type="text" name="genero" placeholder="Gênero..." class = "genero"><br>
+            {% if current_user.tipo == 'funcionario' %}
+            <input type="checkbox" id="estoque_baixo" name="estoque_baixo" value="true" class="checkbox">
+            <label for="estoque_baixo">Livros com estoque baixo</label><br>
+            {% endif %}
+            <input type="submit" value="Filtrar" class ="editar-button">
+        </form><br>
+        {% if livros %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Editora</th>
+                <th>Gênero</th>
+                <th>Quantidade</th>
+                <th>Ano</th>
+                <th>Preço</th>
+                <th><form id="search-form" action="/" method="GET">
+                    <input type="text" class = "search-form-container" id="termo_pesquisa" name="termo_pesquisa" placeholder="Digite o título">
+                <th><button  class="botao-pesquisa"></button></th> 
+                </form>
+                </th>
+            </tr>
+            {% for livro in livros %}
+            <tr class="{{ 'linha-par' if livro.id % 2 == 0 else 'linha-impar' }}">
                 <td>{{ livro.id }}</td>
                 <td>{{ livro.titulo }}</td>
                 <td>{{ livro.autor.nome }}</td>
@@ -45,16 +163,63 @@
                 <td>{{ livro.genero.nome }}</td>
                 <td>{{ livro.quantidade }}</td>
                 <td>{{ livro.ano }}</td>
-                <td>R${{livro.preco}}</td>
-                <td><form action="/excluir/{{ livro.id }}" method="post"><button class ="excluir-button">Excluir</button> </form>
-                <td><form action ="/editar/{{ livro.id }}" method = "get"><button class = "editar-button">Editar</button> </form>
+                <td>{{ livro.preco }}</td>
+                {% if current_user.tipo  == 'funcionario' %}
+                    <td><form action="/excluir/{{ livro.id }}" method="post">
+                        <button class="excluir-button">Excluir</button>
+                    </form></td>
+                   <td><form action="/editar/{{ livro.id }}" method="get">
+                    <button class="editar-button">Editar</button>
+                </form></td> 
+                {% else %}
+                <td>
+                    {% if current_user.is_authenticated %}
+                    <td><button onclick="openCompraModal('{{livro.id}}', '{{livro.quantidade}}', '{{livro.preco}}')" class="editar-button">Comprar</button></td> 
+                    <!-- Modal de Compra -->
+                    <div id="compraModal{{ livro.id }}" class="modal">
+                        <div class="modal-content">
+                            <h1>Comprando:</h1>
+                            <span class="close" onclick="closeCompraModal('{{ livro.id }}')">&times;</span>
+                            <h2>{{ livro.titulo }}</h2>
+                            <p>Preço: R${{ livro.preco }}</p>
+                            <form id="compra-form" action="/comprar/{{ livro.id }}" method="post" onsubmit="return validarCompra('{{ livro.quantidade }}')">
+                                <label for="quantidade">Quantidade:</label><br>
+                                <input type="number" id="quantidade_{{ livro.id }}" name="quantidade" min="1" max="{{ livro.quantidade }}" required oninput="calcularTotal('{{ livro.id }}', '{{ livro.preco }}')"><br><br>
+                                <span id="erro_quantidade_{{ livro.id }}" class="erro">Quantidade indisponível!</span><br><br>
+                                <label for="forma_pagamento">Forma de Pagamento:</label><br>
+                                <select id="forma_pagamento" name="forma_pagamento" required>
+                                    <option value="cartao">Cartão</option>
+                                    <option value="boleto">Boleto</option>
+                                    <option value="pix">Pix</option>
+                                    <option value="berries">Berries</option>
+                                </select><br><br>
+                                <label for="vendedor">Vendedor:</label><br>
+                                <select id="vendedor" name="vendedor" required>
+                                    {% for funcionario in funcionarios %}
+                                    <option value="{{ funcionario.id }}">{{ funcionario.nome }}</option>
+                                    {% endfor %}
+                                </select><br><br>
+                                <p id="desconto_{{ livro.id }}">Desconto: R$0,00</p>
+                                <p id="total_{{ livro.id }}">Total: R$0.00</p>
+                                <button type="submit">Comprar</button>
+                            </form>
+                        </div>
+                    </div>
+                    {% else %}
+                    <form action="/login" method="get">
+                        <td><input type="submit" value="Comprar" class="editar-button"></td>
+                    </form>
+                    {% endif %}
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </table>
         {% else %}
         <p>Nenhum livro cadastrado.</p>
-        {% endif %}  
+        {% endif %}
     </div>
+
     <script>
         function toggleMenu() {
             var sidebar = document.getElementById("mySidebar");
@@ -62,6 +227,52 @@
                 sidebar.style.left = "-250px";
             } else {
                 sidebar.style.left = "0px";
+            }
+        }
+
+        function openCompraModal(id, quantidadeDisponivel, preco) {
+            var modal = document.getElementById("compraModal" + id);
+            modal.style.display = "block";
+            calcularTotal(id, preco);
+        }
+
+        function closeCompraModal(id) {
+            var modal = document.getElementById("compraModal" + id);
+            modal.style.display = "none";
+        }
+
+        function calcularTotal(id, preco) {
+            var quantidade = document.getElementById("quantidade_" + id).value;
+            var desconto = calcularDesconto(quantidade, preco);
+            var total = (preco * quantidade) - desconto;
+            document.getElementById("desconto_" + id).innerHTML = "Desconto: R$" + desconto.toFixed(2);
+            document.getElementById("total_" + id).innerHTML = "Total: R$" + total.toFixed(2);
+        }
+
+        function calcularDesconto(quantidade, preco) {
+            var preco = parseFloat(preco);
+            var desconto = 0;
+            var cliente = "{{ cliente }}";
+            
+            
+            // Aplica os descontos
+            if ( "{{ cliente.time }}" == "flamengo" || "{{ cliente.onepiece_fan }}" == "True"){
+                desconto = 0.10; // 10% de desconto
+            }
+            
+            // Calcula o valor do desconto
+            var valorDesconto = (preco * quantidade * desconto) ;
+            return valorDesconto;
+        }
+
+        function validarCompra(quantidadeDisponivel) {
+            var quantidadeSelecionada = document.getElementById("quantidade").value;
+            if (parseInt(quantidadeSelecionada) > parseInt(quantidadeDisponivel)) {
+                document.getElementById("erro_quantidade").style.display = "block";
+                return false;
+            } else {
+                document.getElementById("erro_quantidade").style.display = "none";
+                return true;
             }
         }
     </script>

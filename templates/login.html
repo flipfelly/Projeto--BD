@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+    .container {
+        text-align: left;
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff; /* Branco */
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        overflow: auto;
+    }
+    label {
+        color: #004d40; 
+        font-weight: bold;
+    }
+    input[type="text"], input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    input[type="submit"] {
+        width: 100%;
+        background-color: #a5d6a7; /* Verde Pastel mais claro */
+        color: #004d40; /* Verde mais escuro */
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #81c784; /* Verde Pastel mais claro */
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="color: #d3ead6">Conectar</h1>
+    </header>
+    <div class="container" style="font-size: 20px ;">
+        <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+
+    <form action="{{ url_for('login') }}" method="post">
+        <input type="text" name="email" placeholder="Email" required><br>
+        <input type="password" name="senha" placeholder="Senha" required><br>
+        <input type="submit" value="Login">
+    </form>
+
+    {% if mensagem %}
+        <p>{{ mensagem }}</p>
+    {% endif %}
+    <a href="/" class="back-button">↩</a>
+</body>
+</html>

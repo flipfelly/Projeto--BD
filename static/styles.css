@@ -185,6 +185,7 @@ h1 {
 }
 .openbtn {
     font-size: 20px;
+    text-align: center;
     cursor: pointer;
     background-color: #004d40; 
     color: #fff; /* Branco */
